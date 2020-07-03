@@ -32,13 +32,13 @@ class AmazonConnection extends Connection {
 
     // Fix the Host header, since HttpConnector.makeReqParams() appends
     // the port number which will cause signature verification to fail
-    req.headers.Host = req.hostname
+    req.headers.host = req.hostname
 
     if (params.body) {
-      req.headers['Content-Length'] = Buffer.byteLength(params.body, 'utf8')
+      req.headers['content-length'] = Buffer.byteLength(params.body, 'utf8')
       req.body = params.body
     } else {
-      req.headers['Content-Length'] = 0
+      req.headers['content-length'] = 0
     }
 
     return aws4.sign(req, this.credentials)
