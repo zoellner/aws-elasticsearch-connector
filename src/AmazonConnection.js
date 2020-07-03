@@ -25,6 +25,7 @@ class AmazonConnection extends Connection {
 
   buildRequestObject (params) {
     const req = super.buildRequestObject(params)
+    req.service = 'es'
 
     if (!req.headers) {
       req.headers = {}
