@@ -1,13 +1,11 @@
 {
   "name": "aws-elasticsearch-connector",
   "version": "8.3.0",
-  "description": "A tiny Amazon Signature Version 4 connection class for Elasticsearch.js 16.x, for compatibility with AWS Elasticsearch and IAM authentication. NOTE: This library is drop-in replacement for http-aws-es, which is no longer actively maintained.",
+  "description": "A tiny Amazon Signature Version 4 connection class for @elastic/elasticsearch, for compatibility with AWS Elasticsearch and IAM authentication.",
   "repository": "https://github.com/compwright/aws-elasticsearch-connector",
   "bugs": "https://github.com/compwright/aws-elasticsearch-connector/issues",
   "keywords": [
     "elasticsearch",
-    "elasticsearch-js",
-    "elasticsearch-js-legacy",
     "aws-es",
     "aws",
     "aws4",
@@ -21,7 +19,7 @@
     "HttpConnection"
   ],
   "engines": {
-    "node": ">= 10.0.0"
+    "node": ">= 10"
   },
   "main": "src/index.js",
   "scripts": {
@@ -53,11 +51,10 @@
     ]
   },
   "dependencies": {
-    "aws4": "^1.10.0",
-    "lodash.get": "^4.4.2"
+    "aws4": "^1.10.0"
   },
   "peerDependencies": {
-    "@elastic/elasticsearch": ">=5",
+    "@elastic/elasticsearch": ">=7.8.0",
     "aws-sdk": "^2.709.0"
   },
   "devDependencies": {

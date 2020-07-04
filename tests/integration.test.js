@@ -4,7 +4,7 @@ const AWS = require('aws-sdk')
 const { Client } = require('@elastic/elasticsearch')
 const argv = require('minimist')(process.argv.slice(2))
 
-const { AmazonConnection, AmazonTransport } = require('../src')
+const createAwsElasticsearchConnector = require('../src')
 
 AWS.config.update({
   region: argv.region,
@@ -12,9 +12,8 @@ AWS.config.update({
 })
 
 const client = new Client({
-  node: argv.endpoint,
-  Connection: AmazonConnection,
-  Transport: AmazonTransport
+  ...createAwsElasticsearchConnector(AWS.config),
+  node: argv.endpoint
 })
 
 client.on('response', (err, res) => {

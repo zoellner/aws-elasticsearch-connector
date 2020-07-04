@@ -1,9 +1,16 @@
 'use strict'
 
-const { Transport } = require('@elastic/elasticsearch')
 const assert = require('assert')
+const { Transport } = require('@elastic/elasticsearch')
+const AWS = require('aws-sdk')
 
-const AmazonTransport = require('../src/AmazonTransport')
+const awsConfig = new AWS.Config({
+  accessKeyId: 'foo',
+  secretAccessKey: 'bar',
+  sessionToken: 'baz'
+})
+
+const AmazonTransport = require('../src/AmazonTransport')(awsConfig)
 
 describe('AmazonTransport', function () {
   it('extends Transport', function () {
@@ -27,6 +34,27 @@ describe('AmazonTransport', function () {
 
     it('accepts callback in place of options', function (done) {
       transport.request({}, () => done())
+    })
+
+    it('waits for AWSConfig.getCredentials()', function (done) {
+      const mockAwsConfig = {
+        credentials: {},
+        getCredentials (next) {
+          next({
+            accessKeyId: 'foo',
+            secretAccessKey: 'bar',
+            sessionToken: 'baz'
+          })
+          done()
+        }
+      }
+      const AmazonTransport = require('../src/AmazonTransport')(mockAwsConfig)
+      const transport = new AmazonTransport({
+        connectionPool: {
+          getConnection: () => null
+        }
+      })
+      transport.request({}, {}, () => {})
     })
   })
 })
