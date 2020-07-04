@@ -10,7 +10,7 @@ class AmazonTransport extends Transport {
     })
   }
 
-  request (params, options = {}, callback = null) {
+  request (params, options = {}, callback = undefined) {
     // options is optional, so if it is omitted, options will be the callback
     if (typeof options === 'function') {
       callback = options
@@ -18,9 +18,9 @@ class AmazonTransport extends Transport {
     }
 
     // Promise support
-    if (callback == null) {
+    if (typeof callback === 'undefined') {
       return this.awaitAwsCredentials()
-        .then(() => super.request(params, options, null))
+        .then(() => super.request(params, options))
     }
 
     // Callback support
