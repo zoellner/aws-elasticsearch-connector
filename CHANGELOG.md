@@ -1,5 +1,9 @@
 # Changelog
 
+## [v9.0.0](https://github.com/compwright/aws-elasticsearch-connector/tree/v9.0.0) (2020-07-04)
+
+[Full Changelog](https://github.com/compwright/aws-elasticsearch-connector/compare/v8.3.0...v9.0.0)
+
 ## [v8.3.0](https://github.com/compwright/aws-elasticsearch-connector/tree/v8.3.0) (2020-07-04)
 
 [Full Changelog](https://github.com/compwright/aws-elasticsearch-connector/compare/v8.2.0...v8.3.0)
