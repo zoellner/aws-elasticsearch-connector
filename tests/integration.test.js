@@ -14,13 +14,7 @@ AWS.config.update({
 const client = new Client({
   node: argv.endpoint,
   Connection: AmazonConnection,
-  Transport: AmazonTransport,
-  awsConfig: {
-    credentials: {
-      accessKeyId: AWS.config.credentials.accessKeyId,
-      secretAccessKey: AWS.config.credentials.secretAccessKey
-    }
-  }
+  Transport: AmazonTransport
 })
 
 client.on('response', (err, res) => {
@@ -36,14 +30,8 @@ describe('AWS Elasticsearch', function () {
   this.timeout(10000)
   this.slow(1000)
 
-  it('should be able to connect', done => {
-    client.cluster.health(function (err, res) {
-      if (err) {
-        done(err)
-        return
-      }
-      done()
-    })
+  it('should be able to connect', () => {
+    return client.cluster.health()
   })
 
   it('can clearScroll()', () => {
